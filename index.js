@@ -75,9 +75,39 @@ class Person {
 */
 
 class Car {
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+    this.milesLeft = 0;
+  }
+  fill(gallons) {
+    this.tank += gallons;
+    this.milesLeft = gallons * this.milesPerGallon;
+  }
+  drive(distance) {
+    if (this.milesLeft <= distance) {
+      this.odometer = this.milesLeft;
+      this.tank = 0;
+      this.milesLeft = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    } else {
+      this.odometer += distance; 
+      this.tank -= distance / this.milesPerGallon;
+      this.milesLeft -= distance;
   
+    }
+  }
 }
 
+const malibu = new Car ('Malibu', 10);
+
+
+console.log(malibu)
+console.log(malibu.fill(5))
+console.log(malibu.drive(25))
+console.log(malibu)
 /*
   TASK 3
     - Write a Lambdasian class.
